@@ -15,7 +15,7 @@ public class GetApiController {
         return api + api_2;
     }
 
-    @GetMapping(value = "/getApiPath")
+    @GetMapping(value = "/getApiPath/{api}")
     public String getApiPath(@PathVariable String api){
         return api;
     }
