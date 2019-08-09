@@ -5,6 +5,7 @@
             <div>
                 <b-form @submit="onSubmit">
                     <b-form-input v-model="username" placeholder="請輸入帳號"></b-form-input>
+                    <b-form-input v-model="password" placeholder="請輸入密碼"></b-form-input>
                     <b-button @click="onSubmit">submit</b-button>
                 </b-form>
             </div>
@@ -21,19 +22,32 @@
         data() {
             return {
                 username: '',
+                password:'',
                 msg: ''
             }
         },
         methods: {
             onSubmit() {
+                /**  Fetch POST方式 **/
+                fetch('/login',{
+                    method:'POST',
+                    body:JSON.stringify({
+                        username:this.username,
+                        password:this.password
+                    }),
+                    headers:{"Content-Type":"application/json; charset=utf-8"},
+                    mode: 'cors',
+                    credentials: 'include'
+                });
+
                 /**四 /postApiJson/RequestBody **/  //Json傳送
-                axios.post('/postApiJson/RequestBody', {
-                        username: this.username,
-                        password: this.username
-                }).then(response => {
-                    console.log(response.data);
-                    this.msg = response.data;
-                })
+                // axios.post('/postApiJson/RequestBody', {
+                //         username: this.username,
+                //         password: this.username
+                // }).then(response => {
+                //     console.log(response.data);
+                //     this.msg = response.data;
+                // })
 
                 /**三 postApiJson **/  //x-www-form-urlencoded 送出 需要用到 qs套件配合
                 // axios.post('/postApiJson', qs.stringify({
